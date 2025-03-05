@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Textured Mesh Acquisition of Objects with a Mobile Device by using Differentiable Rendering">
+  <meta name="keywords" content="NeRF, Reconstruction, Texturing">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TMO: Textured Mesh Acquisition of Objects with a Mobile Device by using Differentiable Rendering</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <link rel="stylesheet" href="./definitive-image-comparison-slider-master/src/dics.css">
+  <script src="./definitive-image-comparison-slider-master/src/dics.js"></script>
+	<script>
+    document.addEventListener('DOMContentLoaded', domReady);
+    function domReady() {
+      var b = document.querySelectorAll('.b-dics');
+      b.forEach(element => 
+        new Dics({
+          container: element,
+          textPosition: 'top'
+        })
+      );
+    }
+	</script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://jh-choi.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <!-- <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://jingsenzhu.github.io/invrend">
+            Learning-based Inverse Rendering
+          </a>
+        </div>
+      </div> -->
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title" style="font-size:36px;">
+            <span style="color:crimson">TMO</span>: <span style="color:crimson">T</span>extured <span style="color:crimson">M</span>esh Acquisition of <span style="color:crimson">O</span>bjects 
+            with a Mobile Device by using Differentiable Rendering  
+            <!-- <span style="color:crimson">I</span><span style="color:darkgoldenrod"><sup>2</sup></span>-<span style="color:darkblue">SDF</span>:  -->
+            <!-- <span style="color:crimson">I</span>ntrinsic <span style="color:darkgoldenrod">I</span>ndoor Scene Reconstruction and Editing via Raytracing in Neural <span style="color:darkblue">SDF</span>s -->
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block" style="font-size: 22px;">
+              <a href="https://jh-choi.github.io/">Jaehoon Choi</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block" style="font-size: 22px;">
+              <a href="https://jdk9405.github.io/">Dongki Jung</a><sup>1</sup>,
+            </span>
+            <span class="author-block" style="font-size: 22px;">
+              Taejae Lee<sup>1</sup>,
+            </span>
+            <span class="author-block" style="font-size: 22px;">
+              Sangwook Kim<sup>1</sup>,
+            </span>
+            <span class="author-block" style="font-size: 22px;">
+              Youngdong Jung<sup>1</sup>,
+            </span>
+            <span class="author-block" style="font-size: 22px;">
+              Dinesh Manocha<sup>2</sup>,
+            </span>
+            <span class="author-block" style="font-size: 22px;">
+              Donghwan Lee<sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block" style="font-size: 18px;"><sup>1</sup><a href="https://www.naverlabs.com/">NAVER LABS</a></span>
+            <span class="author-block" style="font-size: 18px;"><sup>2</sup>University of Maryland</span>
+          </div>
+          <!-- <div class="is-size-5 publication-authors">
+            <strong>CVPR 2023</strong>
+          </div> -->
+          <h2 style="font-size:24px;color:#6e6e6e">CVPR 2023</h2>
+
+          <div class="column has-text-centered">
+            <div class="link-block">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/CVPR2023/papers/Choi_TMO_Textured_Mesh_Acquisition_of_Objects_With_a_Mobile_Device_CVPR_2023_paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/CVPR2023/supplemental/Choi_TMO_Textured_Mesh_CVPR_2023_supplemental.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="http://arxiv.org/abs/2303.15060"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=uyHsYvmVypQ"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/jingsenzhu/i2-sdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span> -->
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data (Soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/figure1_light.png" alt="Nerfies" height="100%">
+      <h2 class="subtitle has-text-centered">
+        <span class="TMO">TMO</span> reconstructs the high-quality geometric mesh with a visually realistic texture.
+      </h2>
+    </div>
+  </div>
+</section>
+
+	
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <div class="content">
+            <div class="b-dics" style="width: 400px;">
+              <img src="static/images/teaser/0c_mono.png" alt="MonoSDF" />
+              <img src="static/images/teaser/0c_ours.png" alt="Ours" />
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <div class="b-dics" style="width: 400px;">
+              <img src="static/images/teaser/0009_orig_filter.png" alt="Input" />
+              <img src="static/images/teaser/0009_relight_filter.png" alt="Relight" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered" style="font-size:16px;">
+        TL;DR: I<sup>2</sup>-SDF resolves challenges in reconstructing small objects inside an indoor scene by a novel bubble loss (Left), and leverages intrinsic decomposition and raytracing to enable photorealistic scene editing and relighting (Right).
+      </h2>
+    </div>
+  </div>
+</section> -->
+<section class="section">
+  <!-- Abstract. -->
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          We present a new pipeline for acquiring a textured mesh in the wild with a single smartphone which offers access to images, depth maps, and valid poses. Our method first introduces an RGBD-aided structure from motion, which can yield filtered depth maps and refines camera poses guided by corresponding depth. Then, we adopt the neural implicit surface reconstruction method, which allows for high-quality mesh and develops a new training process for applying a regularization provided by classical multi-view stereo methods. Moreover, we apply a differentiable rendering to fine-tune incomplete texture maps and generate textures which are perceptually closer to the original scene. Our pipeline can be applied to any common objects in the real world without the need for either in-the-lab environments or accurate mask images. We demonstrate results of captured objects with complex shapes and validate our method numerically against existing 3D reconstruction and texture mapping methods.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered" id="video">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <video id="video" controls playsinline height="100%">
+          <source src="static/videos/supplementary_video.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+<!-- 
+	
+<!-- <section class="section" id="geo">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title">Geometry Reconstruction</h2>
+    <div class="container">
+      <div id="geo-carousel" class="carousel results-carousel">
+        <div class="item item-0">
+          <div class="b-dics">
+            <img src="static/images/geometry/0000_mono.png" alt="MonoSDF" />
+            <img src="static/images/geometry/0000.png" alt="Input" />
+            <img src="static/images/geometry/0000_ours.png" alt="Ours" />
+          </div>
+        </div>
+        <div class="item item-1">
+          <div class="b-dics">
+            <img src="static/images/geometry/0001_mono.png" alt="MonoSDF"/>
+            <img src="static/images/geometry/0001.png" alt="Input" />
+            <img src="static/images/geometry/0001_ours.png" alt="Ours" />
+          </div>
+        </div>
+        <div class="item item-2">
+          <div class="b-dics">
+            <img src="static/images/geometry/0028_mono.png" alt="MonoSDF"/>
+            <img src="static/images/geometry/0028.png" alt="Input" />
+            <img src="static/images/geometry/0028_ours.png" alt="Ours" />
+          </div>
+        </div>
+        <div class="item item-3">
+          <div class="b-dics">
+            <img src="static/images/geometry/0007_mono.png" alt="MonoSDF" />
+            <img src="static/images/geometry/0007.png" alt="Input" />
+            <img src="static/images/geometry/0007_ours.png" alt="Ours" />
+          </div>
+        </div>
+        <div class="item item-4">
+          <div class="b-dics">
+            <img src="static/images/geometry/0299_mono.png" alt="MonoSDF" />
+            <img src="static/images/geometry/0299.png" alt="Input" />
+            <img src="static/images/geometry/0299_ours.png" alt="Ours" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content has-text-justified">
+      <br />
+      We analyze the <b>vanishing gradient</b> problem of SDF-based volume rendering techniques, which results in failures of existing methods to reconstruct off-surface small objects. We propose a novel <b>bubble loss</b> to tackle this.
+    </div>
+  </div>
+</section> -->
+
+<section class="section" id="synthesis">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title">AR-capture</h2>
+    <div class="container">
+      <div id="novel-carousel" class="carousel results-carousel">
+        <div class="item item-0">
+          <div class="b-dics">
+            <img src="static/gifs/AMBIDEX_mesh_True.gif">
+            <img src="static/gifs/AMBIDEX_mesh_False.gif">
+          </div>
+        </div>
+        <div class="item item-3">
+          <div class="b-dics">
+            <img src="static/gifs/AMBIDEX2_mesh_True.gif">
+            <img src="static/gifs/AMBIDEX2_mesh_False.gif">
+          </div>
+        </div>
+        <div class="item item-1">
+          <div class="b-dics">
+            <img src="static/gifs/plant2_mesh_True.gif"/>
+            <img src="static/gifs/plant2_mesh_False.gif"/>
+          </div>
+        </div>
+        <div class="item item-2">
+          <div class="b-dics">
+            <img src="static/gifs/plant_mesh_True.gif"/>
+            <img src="static/gifs/plant_mesh_False.gif"/>
+          </div>
+        </div>
+        <div class="item item-4">
+          <div class="b-dics">
+            <img src="static/gifs/kakao_bike_mesh_True.gif"/>
+            <img src="static/gifs/kakao_bike_mesh_False.gif"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content has-text-justified">
+      <br />
+<!--       Our method outperforms previous methods in novel view synthesis of indoor scenes. Previous methods suffers from either reconstruction failure or overfitting. -->
+    </div>
+  </div>
+</section>
+
+<section class="section" id="synthesis">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title">ARKit-video</h2>
+    <div class="container">
+      <div id="novel-carousel" class="carousel results-carousel">
+        <div class="item item-0">
+          <div class="b-dics">
+            <img src="static/gifs/IMG_0027_rgbdsfm_mesh_True.gif">
+            <img src="static/gifs/IMG_0027_rgbdsfm_mesh_False.gif">
+          </div>
+        </div>
+        <div class="item item-3">
+          <div class="b-dics">
+            <img src="static/gifs/IMG_0025_rgbdsfm_mesh_True.gif">
+            <img src="static/gifs/IMG_0025_rgbdsfm_mesh_False.gif">
+          </div>
+        </div>
+        <div class="item item-1">
+          <div class="b-dics">
+            <img src="static/gifs/IMG_0032_rgbdsfm_mesh_True.gif"/>
+            <img src="static/gifs/IMG_0032_rgbdsfm_mesh_False.gif"/>
+          </div>
+        </div>
+        <div class="item item-2">
+          <div class="b-dics">
+            <img src="static/gifs/chair_long_rgbdsfm_mesh_True.gif"/>
+            <img src="static/gifs/chair_long_rgbdsfm_mesh_False.gif"/>
+          </div>
+        </div>
+        <div class="item item-4">
+          <div class="b-dics">
+            <img src="static/gifs/lucid_rgbdsfm_mesh_True.gif"/>
+            <img src="static/gifs/lucid_rgbdsfm_mesh_False.gif"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content has-text-justified">
+      <br />
+<!--       Our method outperforms previous methods in novel view synthesis of indoor scenes. Previous methods suffers from either reconstruction failure or overfitting. -->
+    </div>
+  </div>
+</section>
+	
+<!-- <section class="section" id="edit">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title">Editing and Relighting</h2>
+    <div class="container">
+      <div id="edit-carousel" class="carousel results-carousel">
+        <div class="item item-0">
+          <video autoplay muted loop playsinline poster controls>
+            <source src="static/videos/321_light.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-1">
+          <div class="b-dics">
+            <img src="static/images/edit/0159.png" alt="Input"/>
+            <img src="static/images/edit/0159_edit.png" alt="Edit" />
+          </div>
+        </div>
+        <div class="item item-2">
+          <div class="b-dics">
+            <img src="static/images/edit/0085.png" alt="Input"/>
+            <img src="static/images/edit/0085_edit.png" alt="Edit #1" />
+            <img src="static/images/edit/0085_metal.png" alt="Edit #2" />
+          </div>
+        </div>
+        <div class="item item-3">
+          <div class="b-dics">
+            <img src="static/images/edit/0047.png" alt="Input"/>
+            <img src="static/images/edit/0047_edit.png" alt="Edit" />
+          </div>
+        </div>
+        <div class="item item-4">
+          <div class="b-dics">
+            <img src="static/images/edit/0043.png" alt="Input"/>
+            <img src="static/images/edit/0043_edit.png" alt="Relight" />
+          </div>
+        </div>
+        <div class="item item-5">
+          <div class="b-dics">
+            <img src="static/images/edit/0110.png" alt="Input"/>
+            <img src="static/images/edit/0110_edit.png" alt="Edit" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content has-text-justified">
+      <br />
+      We disentangle material (physically-based BRDF) and lighting (direct emission and indirect illumination) to enable photorealistic scene editing and relighting using Monte-Carlo raytracing.
+    </div>
+  </div>
+</section> -->
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{choi2023tmo,
+    title = {TMO: Textured Mesh Acquisition of Objects with a Mobile Device by using Differentiable Rendering},
+    author = {Jaehoon Choi and Dongki Jung and Taejae Lee and Sangwook Kim and Youngdon Jung and Dinesh Manocha and Donghwan Lee},
+    booktitle = {CVPR},
+    year = {2023}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="#">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://jh-choi.github.io/" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Thanks to <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> for their excellent website templates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  bulmaCarousel.attach('#geo-carousel', {
+    slidesToScroll: 1,
+    slidesToShow: 2,
+    infinite: true
+  });
+  bulmaCarousel.attach('#novel-carousel', {
+    slidesToScroll: 1,
+    slidesToShow: 2,
+    infinite: true
+  });
+  bulmaCarousel.attach('#edit-carousel', {
+    slidesToScroll: 1,
+    slidesToShow: 2,
+    infinite: true
+  });
+</script>
+
+</body>
+</html>
